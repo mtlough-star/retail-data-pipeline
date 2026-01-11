@@ -1,0 +1,38 @@
+# Place this file in ~/.dbt/profiles.yml or in your dbt_project folder
+# This configures how dbt connects to Snowflake
+
+retail_analytics:
+  target: dev
+  outputs:
+    dev:
+      type: snowflake
+      account: MK10729.us-east-2.aws
+      region: us-east-1
+      
+      user: mtlough
+      password: EdenKaiMilo192125!!
+      
+      role: ACCOUNTADMIN
+      database: RETAIL_DW
+      warehouse: COMPUTE_WH
+      schema: STAGING
+      
+      threads: 4
+      client_session_keep_alive: False
+      query_tag: dbt_retail_analytics
+      
+    prod:
+      type: snowflake
+      account: YOUR_ACCOUNT
+      
+      user: YOUR_USERNAME
+      password: YOUR_PASSWORD
+      
+      role: ACCOUNTADMIN
+      database: RETAIL_DW
+      warehouse: COMPUTE_WH
+      schema: ANALYTICS
+      
+      threads: 4
+      client_session_keep_alive: False
+      query_tag: dbt_retail_analytics_prod

@@ -1,0 +1,37 @@
+name: 'retail_analytics'
+version: '1.0.0'
+config-version: 2
+
+# This setting configures which "profile" dbt uses for this project.
+profile: 'retail_analytics'
+
+# These configurations specify where dbt should look for different types of files.
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+target-path: "target"
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+# Model configurations
+models:
+  retail_analytics:
+    # Staging models - materialize as views
+    staging:
+      +materialized: view
+      +schema: staging
+      
+    # Analytics models - materialize as tables
+    analytics:
+      +materialized: table
+      +schema: analytics
+      
+# Documentation
+vars:
+  # Set the start date for the pipeline
+  start_date: '2010-01-01'

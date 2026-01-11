@@ -1,0 +1,56 @@
+version: 2
+
+sources:
+  - name: raw
+    description: Raw data loaded from CSV files
+    database: RETAIL_DW
+    schema: RAW
+    tables:
+      - name: online_retail
+        description: Raw online retail transactions
+        columns:
+          - name: InvoiceNo
+            description: Unique invoice number
+          - name: StockCode
+            description: Product code
+          - name: CustomerID
+            description: Unique customer identifier
+
+models:
+  - name: stg_online_retail
+    description: Cleaned and standardized online retail transactions
+    columns:
+      - name: invoice_number
+        description: Unique invoice number for each transaction
+        tests:
+          - not_null
+          
+      - name: stock_code
+        description: Unique product/stock code
+        tests:
+          - not_null
+          
+      - name: customer_id
+        description: Unique customer identifier
+        tests:
+          - not_null
+          
+      - name: quantity
+        description: Number of items purchased
+        tests:
+          - not_null
+          
+      - name: unit_price
+        description: Price per unit in GBP
+        tests:
+          - not_null
+          
+      - name: line_total
+        description: Total amount for this line (quantity * unit_price)
+        tests:
+          - not_null
+          
+      - name: invoice_date
+        description: Date and time of the invoice
+        tests:
+          - not_null
